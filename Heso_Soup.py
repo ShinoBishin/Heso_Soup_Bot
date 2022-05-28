@@ -2,6 +2,7 @@ import tweepy
 from pprint import pprint
 import json
 import TweetMsgManager
+from time import sleep
 
 
 def getAccessInfo(infoFile):
@@ -28,8 +29,11 @@ def main():
     infoFile = "info.json"
     info = getAccessInfo(infoFile)
     msgManager = TweetMsgManager.CTweetMessageManager()
-    message = msgManager.createMsg()
-    pprint(CreateTweet(message, info))
+    while True:
+        message = msgManager.createMsg()
+        pprint(CreateTweet(message, info))
+        # 暫定1時間Sleep
+        sleep(360)
 
 
 if __name__ == "__main__":
