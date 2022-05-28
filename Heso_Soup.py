@@ -29,11 +29,14 @@ def main():
     infoFile = "info.json"
     info = getAccessInfo(infoFile)
     msgManager = TweetMsgManager.CTweetMessageManager()
-    while True:
-        message = msgManager.createMsg()
-        pprint(CreateTweet(message, info))
-        # 暫定1時間Sleep
-        sleep(360)
+    try:
+        while True:
+            message = msgManager.createMsg()
+            pprint(CreateTweet(message, info))
+            # 暫定1時間Sleep
+            sleep(3600)
+    except KeyboardInterrupt:
+        print("ﾌﾟｼｭ…")
 
 
 if __name__ == "__main__":
