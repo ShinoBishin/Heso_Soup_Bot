@@ -1,18 +1,16 @@
-from pydoc import cli
-from ssl import ALERT_DESCRIPTION_UNKNOWN_PSK_IDENTITY
 import tweepy
 from pprint import pprint
-import schedule
-from time import sleep
 import json
-import os
-
-# アクセストークン読み込み
-file = open("info.json", "r")
-info = json.load(file)
+import TweetMsgManager
 
 
-def ClientInfo():
+def getAccessInfo(infoFile):
+    file = open(infoFile, "r")
+    info = json.load(file)
+    return info
+
+
+def ClientInfo(info):
     client = tweepy.Client(bearer_token=info["BEARER_TOKEN"],
                            consumer_key=info["API_KEY"],
                            consumer_secret=info["API_SECRET"],
@@ -22,12 +20,17 @@ def ClientInfo():
     return client
 
 
-message = "ﾌﾟｼﾟｼｯﾌﾟｼﾟｼｯﾌﾟｼｯﾌﾟｼｯﾌﾟｼｯﾌﾟｼｯﾌﾟｼｯﾌﾟｼｯﾌﾟｼｯ"
+def CreateTweet(message, infoinfo):
+    return ClientInfo(infoinfo).create_tweet(text=message)
 
 
-def CreateTweet(message):
-    tweet = ClientInfo().create_tweet(text=message)
-    return tweet
+def main():
+    infoFile = "info.json"
+    info = getAccessInfo(infoFile)
+    msgManager = TweetMsgManager.CTweetMessageManager()
+    message = msgManager.createMsg()
+    pprint(CreateTweet(message, info))
 
 
-pprint(CreateTweet(message))
+if __name__ == "__main__":
+    main()
