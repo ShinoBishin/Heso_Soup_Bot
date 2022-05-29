@@ -75,7 +75,9 @@ def main():
     except KeyboardInterrupt:
         print("ﾌﾟｼュｳｳｳｳｳ…")
     except tweepy.TweepyException as e:
-        print("エラーﾌﾟｼｭ...", e)
+        print("tweepyエラーﾌﾟｼｭ...", e)
+    except Exception as e:
+        print("エラーﾌﾟｼｭ...")
 
 
 if __name__ == "__main__":
