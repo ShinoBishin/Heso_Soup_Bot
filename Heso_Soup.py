@@ -74,10 +74,13 @@ def main():
 
     except KeyboardInterrupt:
         print("ﾌﾟｼュｳｳｳｳｳ…")
+        logging.info("正常")
     except tweepy.TweepyException as e:
         print("tweepyエラーﾌﾟｼｭ...", e)
+        logging.info(e)
     except Exception as e:
         print("エラーﾌﾟｼｭ...")
+        logging.info(e)
 
 
 if __name__ == "__main__":
