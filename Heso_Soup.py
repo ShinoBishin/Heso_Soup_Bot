@@ -26,30 +26,34 @@ def CreateTweet(message, infoinfo):
     return ClientInfo(infoinfo).create_tweet(text=message)
 
 
-def checkDuplicate(message, info, msgManager):
-    duplicate = ClientInfo(info).search_recent_tweets(
+def checkDuplicate(message, info):
+    tweetList = []
+    tweets = ClientInfo(info).search_recent_tweets(
         query=message, max_results=10)
-    for i in duplicate:
-        while(i.text == message):
-            message = msgManager.createMsg()
+    if(tweets.data != None):
+        for t in tweets.data:
+            tweetList.append(t.text)
+    else:
+        tweetList.append("")
+
+    return tweetList
 
 
 def main():
     infoFile = "info.json"
     info = getAccessInfo(infoFile)
     msgManager = TweetMsgManager.CTweetMessageManager()
-    oldMsg = ""
-    duplicateList = []
     try:
         while True:
             message = msgManager.createMsg()
-
-            checkDuplicate(message, info, msgManager)
+            duplicateList = checkDuplicate(message, info)
+            while(duplicateList.count(message) > 0):
+                message = msgManager.createMsg()
+                duplicateList = checkDuplicate(message, info)
 
             pprint(CreateTweet(message, info))
-            duplicateList.append(message)
             # 暫定1時間Sleep
-            sleep(3600)
+            # sleep(60)
     except KeyboardInterrupt:
         print("ﾌﾟｼｭ…")
 
