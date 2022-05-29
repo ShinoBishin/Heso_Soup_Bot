@@ -52,6 +52,9 @@ def main():
     logging.basicConfig(filename='Push.log',
                         format=formatter, level=logging.INFO)
 
+    # 起動時に一度ツイート
+    message = msgManager.createMsg()
+    logging.info(CreateTweet(message, info))
     # 1時間毎にツイートする
     try:
         while True:
