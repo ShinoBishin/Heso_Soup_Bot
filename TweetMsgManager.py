@@ -15,7 +15,7 @@ class CTweetMessageManager:
 
     def createMsg(self):
         # TODO: msg生成処理の拡張
-        return str(random.randint(self.baseStr)) + random.choice(self.baseStr) + random.choise(self.baseStr)
+        return random.choice(self.baseStr) + random.choice(self.baseStr) + random.choice(self.baseStr)
 
 
 # ツイート重複回避(暫定)
