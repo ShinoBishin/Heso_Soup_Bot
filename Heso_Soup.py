@@ -16,8 +16,6 @@ def getAccessInfo(infoFile):
 
 
 def ClientInfo(info):
-    # 毎回初期化するとどうなる？
-    client = ""
     client = tweepy.Client(bearer_token=info["BEARER_TOKEN"],
                            consumer_key=info["API_KEY"],
                            consumer_secret=info["API_SECRET"],
@@ -29,18 +27,16 @@ def ClientInfo(info):
 def CreateTweet(message, infoinfo):
     return ClientInfo(infoinfo).create_tweet(text=message)
 
-# 重複回避用(リスト取得)
 # def getDuplicateList(message, info):
-#     tweetList = []
-#     tweets = ClientInfo(info).search_recent_tweets(
-#         query=message, max_results=10)
-#     if(tweets.data != None):
-#         for t in tweets.data:
-#             tweetList.append(t.text)
-#     else:
-#         tweetList.append("")
+#    tweetList = []
+#    tweets = ClientInfo(info).get_users_tweets("HesoSoup")
+#   # if(tweets.data != None):
+#   #     for t in tweets.data:
+#   #         tweetList.append(t.text)
+#   # else:
+#   #     tweetList.append("")
 #
-#     return tweetList
+#    return tweetList
 
 
 def main():

@@ -13,13 +13,10 @@ class CTweetMessageManager:
         for base in pushStrList:
             self.baseStr.append(base)
 
-#    def createMsg(self):
-#        # TODO: msg生成処理の拡張
-#        return random.choice(self.baseStr) + random.choice(self.baseStr)
-
     def createMsg(self):
         # TODO: msg生成処理の拡張
-        return str(random.randint(0, 10000)) + ":" + random.choice(self.baseStr)
+        return str(random.randint(self.baseStr)) + random.choice(self.baseStr) + random.choise(self.baseStr)
+
 
 # ツイート重複回避(暫定)
 # duplicateList = checkDuplicate(message, info)
