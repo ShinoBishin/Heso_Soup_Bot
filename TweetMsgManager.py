@@ -8,18 +8,28 @@ pushStrList = ["ﾌﾟｼｯ!", "ﾌﾟｼｭﾌﾟｼｭ!!", "ﾌﾟｼｭｳ�
 class CTweetMessageManager:
 
     baseStr = []
+    checkDuplicateBuf = []
 
     def __init__(self):
         for base in pushStrList:
             self.baseStr.append(base)
 
+    def checkDuplicate(self, msg):
+
+        if(len(self.checkDuplicateBuf) > 10):
+            del self.checkDuplicateBuf[0]
+
+        if msg in self.checkDuplicateBuf:
+            return False
+
+        return True
+
     def createMsg(self):
-        # TODO: msg生成処理の拡張
-        return random.choice(self.baseStr) + random.choice(self.baseStr) + random.choice(self.baseStr)
+        msg = random.choice(
+            self.baseStr) + random.choice(self.baseStr) + random.choice(self.baseStr)
 
+        while(False == self.checkDuplicate(msg)):
+            msg = random.choice(
+                self.baseStr) + random.choice(self.baseStr) + random.choice(self.baseStr)
 
-# ツイート重複回避(暫定)
-# duplicateList = checkDuplicate(message, info)
-# while(duplicateList.count(message) > 0):
-#     message = msgManager.createMsg()
-#     duplicateList = checkDuplicate(message, info)
+        return msg

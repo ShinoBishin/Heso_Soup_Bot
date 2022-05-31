@@ -27,17 +27,6 @@ def ClientInfo(info):
 def CreateTweet(message, infoinfo):
     return ClientInfo(infoinfo).create_tweet(text=message)
 
-# def getDuplicateList(message, info):
-#    tweetList = []
-#    tweets = ClientInfo(info).get_users_tweets("HesoSoup")
-#   # if(tweets.data != None):
-#   #     for t in tweets.data:
-#   #         tweetList.append(t.text)
-#   # else:
-#   #     tweetList.append("")
-#
-#    return tweetList
-
 
 def main():
     infoFile = "info.json"
@@ -51,11 +40,11 @@ def main():
     # 起動時に一度ツイート
     message = msgManager.createMsg()
     logging.info(CreateTweet(message, info))
-    # 1時間毎にツイートする
+    msgManager.checkDuplicateBuf.append(message)
+
+    # 以降1時間毎にツイートする
     try:
         while True:
-            message = msgManager.createMsg()
-
             if((timeCount % LOGGING_TIME) == 0):
                 logging.info("ﾌﾟｼｭ...")
 
@@ -63,6 +52,9 @@ def main():
                 message = msgManager.createMsg()
                 # pprint(CreateTweet(message, info))  # Tweet実行
                 logging.info(CreateTweet(message, info))
+
+                msgManager.checkDuplicateBuf.append(message)
+
                 timeCount = 0
 
             sleep(1)
